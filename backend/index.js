@@ -9,6 +9,7 @@ const helmet = require("helmet");
 // Creating express object
 const authRoutes = require("./routes/auth");
 const app = express();
+const path = require("path");
 dotenv.config();
 app.use(cors());
 app.use(express.json());
@@ -17,7 +18,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyparser.json({ limit: "30mb", extended: true }));
 app.use(bodyparser.urlencoded({ limit: "30mb", extended: true }));
-
+app.use(express.static(path.join(__dirname, "/public")));
 // Handling GET request
 app.use("/auth", authRoutes);
 app.get("/", (req, res) => {
