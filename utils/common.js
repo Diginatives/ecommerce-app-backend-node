@@ -5,7 +5,6 @@ const Mailgen = require("mailgen");
 const User = require("../models/user");
 const UserOTP = require("../models/userOTPverfication");
 module.exports.sendresetPasswordMail = async (name, email, token) => {
-  console.log(name, email, token, "name, email, token");
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -23,12 +22,13 @@ module.exports.sendresetPasswordMail = async (name, email, token) => {
       to: email, // list of receivers
       subject: "Please confirm Your token ✔", // Subject line
       text: "Hello world?", // plain text body
-      html: `<b>Hello ${name}? Please click the given link to change password <a href=http://localhost:3000/resetpassword/${token}>Token</a></b>`, // html body
+      // html: `<b>Hello ${name}? Please click the given link to change password <a href=http://localhost:3000/resetpassword/${token}>Token</a></b>`, // html body
+      html: `<b>Hello ${name}? Please click the given link to change password <a href=https://cobalt-blue-seal-ring.cyclic.app/resetpassword/${token}>Token</a></b>`, // html body
     };
     transporter
       .sendMail(options)
       .then(() => {
-        console.log(options, "tayayyayab");
+        console.log(options, "options");
         return options;
       })
       .catch((err) => console.log("err", err.message));
