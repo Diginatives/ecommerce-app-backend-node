@@ -37,7 +37,6 @@ module.exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
-    console.log(user.active, "tayayab");
     if (!user)
       return res.status(400).json({ msg: { userIfo: "User Does not exist" } });
     if (user.active === false)
